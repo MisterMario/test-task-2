@@ -1,0 +1,14 @@
+@import url("reset.css");
+
+#chart {
+	width: 100%;
+	height: 500px;
+	background: #A0A0A0;
+}
+canvas {
+	width: inherit;
+	height: inherit;
+}
+#controls {
+	margin-top: 20px;
+}

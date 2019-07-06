@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="view/css/styles.css">
+</head>
+<body>
+	<div id="chart">
+		<canvas id="myChart"></canvas>
+	</div>
+	<div id="controls">
+		<label for="fromDate">Начало периода:</label>
+		<input type="text" name="fromDate">
+		<br />
+		<label for="toDate">Конец периода:</label>
+		<input type="text" name="toDate">
+		<br />
+		<input type="button" name="send" value="Получить данные" onclick="sendData();">
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<script src="view/js/chart.js" defer></script>
+</body>
+</html>
