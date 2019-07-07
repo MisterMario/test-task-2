@@ -1,0 +1,35 @@
+@import url("reset.css");
+
+
+h1 {
+	font-size: 30px;
+	padding: 20px 0px 0px 20px;
+}
+
+#chart {
+	width: 100%;
+	height: 500px;
+	background: #A0A0A0;
+}
+#chart canvas {
+	width: inherit;
+	height: inherit;
+}
+#controls {
+	width: 300px;
+	padding: 20px;
+}
+#controls > div {
+	margin-top: 15px;
+	text-align: left;
+	overflow: hidden;
+}
+#controls > div:first-child {
+	margin-top: 0;
+}
+#controls > div input {
+	float: right;
+	width: 170px;
+	outline: none;
+	box-sizing: border-box;
+}

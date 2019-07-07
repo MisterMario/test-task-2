@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Динамика курса Р к $</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" defer></script>
+	<script src="js/script.js" defer></script>
+</head>
+<body>
+	<div id="container">
+		<div id="chart">
+			<canvas id="myChart"></canvas>
+		</div>
+		<h1>Динамика изменения курса доллара к рублю</h1>
+		<div id="controls">
+			<div>
+				<label for="fromDate">Начало периода:</label>
+				<input type="text" name="fromDate" placeholder="01.06.2019" value="01.06.2019">
+			</div>
+			<div>
+				<label for="toDate">Конец периода:</label>
+				<input type="text" name="toDate" placeholder="06.07.2019" value="06.07.2019">
+			</div>
+			<div>
+				<input type="button" name="send" value="Сформировать график" onclick="sendData();">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
