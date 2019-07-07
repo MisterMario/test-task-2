@@ -33,7 +33,16 @@ function onSuccess(response) {
 }
 
 function onError(jqXHR, textStatus, errorThrown) {
-	console.log('Произошла ошибка: ' + textStatus);
+	switch(jqXHR.status) {
+		case 0:
+			alert('Ошибка при попытке соединиться с сервером!');
+			break;
+		case 500:
+			alert('На сервере произошла ошибка!\nОбратитесь к администратору ресурса!');
+			break;
+		default:
+			alert('Произошла ошибка при попытке получить даные!\nОбратитесь к администратору ресурса!');
+	}
 }
 
 function drawChart(date_arr, val_arr) {
