@@ -1,5 +1,7 @@
+var chart = null;
+
 window.onload = function() {
-	var chart = document.getElementById('myChart').getContext('2d');
+	drawChart([0,0], [0,0]);
 }
 
 function sendData() {
@@ -24,13 +26,44 @@ function sendData() {
 		});
 }
 
-function onSuccess(response, textStatus, jqXHR) {
-	console.log('Ответ от сервера: ' + response.message);
+function onSuccess(response) {
 	console.log(response);
-	console.log(textStatus);
+	if (response.success)
+		drawChart(response.message.date_arr, response.message.val_arr);
 }
 
 function onError(jqXHR, textStatus, errorThrown) {
 	console.log('Произошла ошибка: ' + textStatus);
-	console.log(jqXHR);
+}
+
+function drawChart(date_arr, val_arr) {
+	var context = document.getElementById('myChart').getContext('2d');
+
+	// Если не очистить холст перед перерисовкой - возможны баги. Например, вывод старого графика при скроллинге.
+	if (chart != null) chart.destroy();
+	chart = new Chart(context, {
+	    // The type of chart we want to create
+	    type: 'line',
+
+	    // The data for our dataset
+	    data: {
+	        labels: date_arr,
+	        datasets: [{
+	            label: 'Стоимость доллара в рублях',
+	            backgroundColor: 'rgba(255, 99, 132, 1)',
+	            borderColor: 'rgb(255, 99, 132)',
+	            data: val_arr,
+	            radius: 0,
+	        }]
+	    },
+
+	    options: {
+	        elements: {
+	            line: {
+	                tension: 0, // disables bezier curves
+	                fill: false,
+	            }
+	        }
+    }
+	});
 }
