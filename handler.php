@@ -22,17 +22,17 @@ else {
 	preg_match_all("/[0-9]{1,}/", $date["to"], $toDate);
 	$fromDate = $fromDate[0];
 	$toDate = $toDate[0];
-	$now = getdate();
+	$intFromDate = (int)strtotime($fromDate[2]."-".$fromDate[1]."-".$fromDate[0]." 00:00:00");
+	$intToDate = (int)strtotime($toDate[2]."-".$toDate[1]."-".$toDate[0]." 00:00:00");
 
 	if (!checkdate($fromDate[1], $fromDate[0], $fromDate[2]) || 
 		!checkdate($toDate[1], $toDate[0], $toDate[2]))
 		$answer["message"] = "Ошибка! Одна из-за введенных дат не существует!";
 
-	elseif ($fromDate[0] > $toDate[0] || $fromDate[1] > $toDate[1] || $fromDate[2] > $toDate[2])
+	elseif ($intFromDate > $intToDate)
 		$answer["message"] = "Ошибка! Дата начала периода не быть позднее даты конца периода!";
 
-	elseif ($fromDate[0] > $now["mday"] || $fromDate[1] > $now["mon"] || $fromDate[2] > $now["year"] ||
-			 $toDate[0] > $now["mday"] || $toDate[1] > $now["mon"] || $toDate[2] > $now["year"])
+	elseif ($intFromDate > time() || $intToDate > time())
 		$answer["message"] = "Ошибка! Одна из введенных дат еще не наступила!";
 
 	else {

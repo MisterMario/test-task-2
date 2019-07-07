@@ -30,6 +30,7 @@ function onSuccess(response) {
 	console.log(response);
 	if (response.success)
 		drawChart(response.message.date_arr, response.message.val_arr);
+	else alert(response.message);
 }
 
 function onError(jqXHR, textStatus, errorThrown) {
@@ -62,7 +63,7 @@ function drawChart(date_arr, val_arr) {
 	            backgroundColor: 'rgba(255, 99, 132, 1)',
 	            borderColor: 'rgb(255, 99, 132)',
 	            data: val_arr,
-	            radius: 0,
+	            radius: 1,
 	        }]
 	    },
 
