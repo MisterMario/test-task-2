@@ -24,6 +24,9 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Файлы, используемые при отладке проекта
+output.txt
+
 # Windows shortcuts
 *.lnk
 

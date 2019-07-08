@@ -33,7 +33,7 @@ function onSuccess(response) {
 	else alert(response.message);
 }
 
-function onError(jqXHR, textStatus, errorThrown) {
+function onError(jqXHR) {
 	switch(jqXHR.status) {
 		case 0:
 			alert('Ошибка при попытке соединиться с сервером!');
