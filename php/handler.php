@@ -36,6 +36,9 @@ else
 	elseif ($intFromDate > time() || $intToDate > time())
 		$answer["message"] = "Ошибка! Одна из введенных дат еще не наступила!";
 
+	elseif (strtotime($date["from"]) < 709941600)
+		$answer["message"] = "В системе отсутсвуют данные за периоды ранее 01.07.1992!";
+
 	else
 	{
 		ob_start();
