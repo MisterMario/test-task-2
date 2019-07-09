@@ -8,7 +8,7 @@
  */
 class Parser
 {
-	private const CACHE_FILENAME = "cache.json";
+	const CACHE_FILENAME = "cache.json";
 	private $_cache = null; // Хранит кэш в виде ассоциативного массива
 	public $echoEnabled = false; // Определяет будут ли выводиться ECHO сообщения в процессе работы некоторых методов.
 	private static $instance = null;
