@@ -74,10 +74,8 @@ class Parser
 				for ($m = $start_month; $m <= ($y != $to["y"] ? 12 : $to["m"]); $m++)
 
 					if (!isset($this->_cache["${y}"][$m < 10 ? "0${m}" : "${m}"]))
-					{
-						echo "В кэше нет данных за ${m}.${y}\r\n\r\n\r\n";
+						
 						return false;
-					}
 		}
 		else return false;
 
@@ -99,15 +97,9 @@ class Parser
 		$to = $this->getDateInfo($toDate);
 
 		if ($this->existsDates($from, $to))
-		{
-			echo "Данные взяты из кэша!\r\n\r\n";
 			$output_arr = $this->getDataFromCache($from, $to);
-		}
 		else
-		{
-			echo "Данные взяты с сайта Центрального банка Росии\r\n\r\n";
 			$output_arr = $this->getDataFromRemote($from, $to);
-		}
 
 		return $output_arr;
 	}

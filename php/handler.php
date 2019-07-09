@@ -38,7 +38,7 @@ else
 
 	else
 	{
-		ob_start();
+
 		$parser = Parser::getInstance();
 		$data_arr = $parser->getData($date["from"], $date["to"]);
 
@@ -56,13 +56,7 @@ else
 			}
 		}
 		else $answer["message"] = "Ошибка! Не удается получить данные с удаленного сервера!";
-		
-		echo "\r\n\r\n\r\n";
-		print_r($answer["message"]["date_arr"]);
-		echo "\r\n\r\n\r\n";
-		print_r($answer["message"]["val_arr"]);
 
-		file_put_contents("log.txt", ob_get_clean());
 	}
 
 }
