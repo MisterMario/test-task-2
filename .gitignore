@@ -25,7 +25,8 @@ $RECYCLE.BIN/
 *.msp
 
 # Файлы, используемые при отладке проекта
-output.txt
+log.txt
+cache.json
 
 # Windows shortcuts
 *.lnk

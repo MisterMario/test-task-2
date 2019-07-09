@@ -16,7 +16,7 @@ function sendData() {
 		alert('Ошибка! Введите дату в формате [dd.mm.YYYY]');
 	else
 		$.ajax({
-			url: '/handler.php',
+			url: '/php/handler.php',
 			type: 'POST',
 			data: JSON.stringify(dateRange),
 			dataType: 'json',

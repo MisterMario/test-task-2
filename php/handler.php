@@ -1,6 +1,6 @@
 <?php 
 
-ob_start();
+require_once("parser.class.php");
 
 
 $date = json_decode(file_get_contents("php://input"), true);
@@ -38,15 +38,34 @@ else
 
 	else
 	{
+		ob_start();
+		$parser = Parser::getInstance();
+		$data_arr = $parser->getData($date["from"], $date["to"]);
 
-		// Тут будет вызов парсера
+		if ($data_arr)
+		{
+			$answer["success"] = true;
+			$answer["message"] = array(
+				"date_arr" => array(),
+				"val_arr" => array(),
+			);
 
+			foreach ($data_arr as $date => $value) {
+				$answer["message"]["date_arr"][] = $date;
+				$answer["message"]["val_arr"][] = $value;
+			}
+		}
+		else $answer["message"] = "Ошибка! Не удается получить данные с удаленного сервера!";
+		
+		echo "\r\n\r\n\r\n";
+		print_r($answer["message"]["date_arr"]);
+		echo "\r\n\r\n\r\n";
+		print_r($answer["message"]["val_arr"]);
+
+		file_put_contents("log.txt", ob_get_clean());
 	}
 
 }
-
-file_put_contents("output.txt", ob_get_clean());
-
 
 echo json_encode($answer);
 
