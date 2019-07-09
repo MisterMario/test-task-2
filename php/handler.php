@@ -38,9 +38,15 @@ else
 
 	else
 	{
-
-		$parser = Parser::getInstance();
+		ob_start();
+		echo date("[H:i d:m:Y]:")."\r\n";
+		echo "Запрошены данные с [${date["from"]}] по [${date["to"]}]\r\n";
+		$parser = Parser::getInstance(true);
 		$data_arr = $parser->getData($date["from"], $date["to"]);
+
+		if (!$data_arr)
+			echo "Произошла ошибка при получении данных! Источник сообщения: class Parser!\r\n";
+		file_put_contents("log.txt", ob_get_clean()."\r\n", FILE_APPEND);
 
 		if ($data_arr)
 		{

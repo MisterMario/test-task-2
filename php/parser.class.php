@@ -1,16 +1,29 @@
 <?php 
 
+/**
+ * Класс для получения массива данных с курсом доллара США к русскому рублю за период.
+ * В процессе работы класс выводит информационные сообщения через echo, которые можно перехватывать и логировать.
+ * Для того, чтобы включить вывод ECHO сообщений - нужно при получении экземпляра класса передать параметр
+ * $echoEnabled со значением true.
+ */
 class Parser
 {
 	private const CACHE_FILENAME = "cache.json";
-	public $_cache = null; // Хранит кэш в виде ассоциативного массива
+	private $_cache = null; // Хранит кэш в виде ассоциативного массива
+	public $echoEnabled = false; // Определяет будут ли выводиться ECHO сообщения в процессе работы некоторых методов.
 	private static $instance = null;
 
-	public static function getInstance()
+	/**
+	 * [Возвращает единственный экземпляр класса Parser.]
+	 * @param  [boolean] $echoEnabled [true - Включить вывод ECHO сообщений. По умолчанию - false (вывод отключен).]
+	 * @return [Parser]               [Экземпляр класса Parser]
+	 */
+	public static function getInstance($echoEnabled = false)
 	{
 		if (static::$instance === null)
 		{
 			static::$instance = new self();
+			static::$instance->echoEnabled = $echoEnabled;
 			$cache_string = @file_get_contents(static::CACHE_FILENAME);
 
 			if ($cache_string != false)
@@ -97,9 +110,17 @@ class Parser
 		$to = $this->getDateInfo($toDate);
 
 		if ($this->existsDates($from, $to))
+		{
 			$output_arr = $this->getDataFromCache($from, $to);
+			if ($this->echoEnabled)
+				echo "Данные извлечены из кэша!\r\n";
+		}
 		else
+		{
 			$output_arr = $this->getDataFromRemote($from, $to);
+			if ($this->echoEnabled)
+				echo "Данные получены с сайта Центрального банка России!\r\n";
+		}
 
 		return $output_arr;
 	}
